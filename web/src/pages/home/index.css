@@ -1,0 +1,21 @@
+main {
+    position: relative;
+    top: 3rem;
+}
+
+.price-lbl {
+    position: absolute;
+    top: 70%;
+}
+
+.cardFormat {
+    width: 18rem;
+    height: 22rem;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.alignContent{
+    position: relative;
+    left:10%;
+}

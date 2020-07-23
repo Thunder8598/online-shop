@@ -1,0 +1,51 @@
+main{
+    position: relative;
+    top: 10%;
+}
+
+body{
+    background-color: linen;
+}
+
+.description{
+    background-color: #f8f9fa;
+    width:75%;
+    height: 100%;
+
+    border-radius: 50px 0px 0px 50px;
+
+    padding: 2% 2% 2% 4%;
+}
+
+.img{
+    height: 270px;
+    width: 432px;
+}
+
+.description p{
+    position: absolute;
+    left:47%;
+
+    width:25%;
+}
+
+.price{
+    position: absolute;
+    left: 75%;
+    top: 0%;
+    background-color: #f8f9fa;;
+
+    padding: 2% 2% 2%;
+
+    border-radius: 0px 50px 50px 0px;
+
+    height: 100%;
+    width: 25%;
+}
+
+.price button{
+    position: relative;
+    top:20%;
+
+    border-radius: 50px;
+}

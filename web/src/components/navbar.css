@@ -1,0 +1,89 @@
+#form {
+    position: relative;
+    left: 25%;
+    width: 50%;
+}
+
+#searchBar {
+    width: 60%;
+    border-radius: 50px 0px 0px 50px;
+}
+
+#btnSearch {
+    border-radius: 0px 50px 50px 0px;
+}
+
+.filtersOff{
+    width: 0%;
+}
+
+.filters {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 0px;
+    left: 0px;
+    overflow-x: hidden;
+    transition: 0.5;
+    padding-top: 10px;
+}
+
+.filters button{
+    margin-left: 250px;
+    border-radius: 50px;
+}
+
+.filters a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.filters a:hover {
+    color: #f1f1f1;
+}
+
+.shop-car-off{
+    width: 0;
+}
+
+.shop-car-show{
+    position: fixed;
+    top: 15%;
+    left: 65%;
+
+    z-index: 2;
+
+    width: 35%;
+    height: 400px;
+
+    overflow-x: hidden;
+    transition: 0.5;
+
+    border-radius: 20px;
+
+    background-color: #f8f9fa;
+}
+
+.shop-car-item{
+    width: 100%;
+    height: auto;
+
+    padding: 2% 2% 0% 8%;
+}
+
+.shop-car-btn{
+    margin-left: 30%;
+}
+
+.shop-car-item .info{
+    margin-left: 2%;
+}
+
+.a{
+    margin-left: 30%;
+}
