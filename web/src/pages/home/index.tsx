@@ -1,46 +1,45 @@
 import React from "react";
+import Navbar from "./../../components/navbar";
+import Products from "./../../types/Products";
+import NoServer from "./../../components/noserver";
+import Api from "../../api";
 import { Link, RouteComponentProps } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import Navbar from "./../../components/navbar";
-import Api from "../../api";
-import Products from "./../../types/Products";
 
 interface State {
-    ProductsLoaded: boolean,
+    //Vetor do tipo Products
+    ProductsArray: Products[];
     QueryParams?: string | null,
+    ServerOff: boolean,
 }
 
 class Home extends React.Component<RouteComponentProps, State> {
-
-    //Vetor do tipo Products
-    productsArray: Products[];
 
     constructor(props: RouteComponentProps) {
         super(props);
 
         this.state = {
-            ProductsLoaded: false,
+            //Inicializa productsArray
+            ProductsArray: [],
             QueryParams: "",
+            ServerOff: false,
         };
-
-        //Inicializa productsArray
-        this.productsArray = [];
     }
 
     //Carrega produtos
     loadProducts = (search: string | null) => {
-        let dataProducts = null;
 
         //Recebe promessa do server
-        dataProducts = Api.get(`/products/?search=${search}`);
+        const dataProducts = Api.get(`/products/?search=${search}`);
+
+        dataProducts.catch(() => this.setState({ ServerOff: true }));
 
         //Espera promessa e então...
         dataProducts.then((response) => {
-            this.productsArray = response.data; // ... atribui valores no array
+            this.setState({ ServerOff: false });
 
-            //Muda o estado indicando que o processo está concluído e obriga o react a atualizar a página
-            this.setState({ ProductsLoaded: true });
+            this.setState({ ProductsArray: response.data }); // ... atribui valores no array
         });
     }
 
@@ -56,22 +55,33 @@ class Home extends React.Component<RouteComponentProps, State> {
         }
     }
 
+    componentWillMount() {
+        this.search();
+    }
+
+    componentWillUpdate() {
+        //Esta usando setTimeout porque o método executa antes da barra de endereço receber o valor
+        setTimeout(() => this.search(), 32);
+    }
 
     //Renderiza pagina
     render() {
-        this.search();
 
         return (
             <>
                 <Navbar />
 
-                <main className="container">
+                <main className="">
 
-                    <div className="form-inline alignContent" >
+                    {
+                        (this.state.ServerOff) ? (<NoServer />) : (<></>)
+                    }
+
+                    <div className="form-inline content">
 
                         {
                             //Para cada produto no vetor, um card é renderizado
-                            this.productsArray.map((product) =>
+                            this.state.ProductsArray.map((product: Products) =>
                                 (
                                     <Link to={`/product/${product.ProductsId}`} key={product.ProductsId}>
                                         <div className="card cardFormat shadow-lg p-3 mb-5 bg-white rounded">

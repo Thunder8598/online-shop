@@ -1,0 +1,14 @@
+.noserver{
+    position: absolute;
+
+    left: 25%;
+    top: 100px;
+
+    width:50%;
+
+    padding: 2%;
+
+    border-radius: 50px;
+
+    background-color: #f8f9fa;
+}

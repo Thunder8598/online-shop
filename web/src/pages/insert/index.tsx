@@ -47,6 +47,7 @@ const Insert = () => {
 
         await Api.post("/products", data, config).then((response) => {
             if (response.data) {
+
                 setAlert(1);
 
                 setTimeout(() => setAlert(0), 4000);
@@ -64,7 +65,11 @@ const Insert = () => {
                 setAlert(2);
                 setTimeout(() => setAlert(0), 4000);
             }
+        }).catch(() => {
+            setAlert(3);
+            setTimeout(() => setAlert(0), 4000);
         });
+
     }
 
 
@@ -73,12 +78,12 @@ const Insert = () => {
             <Navbar />
 
             {
-                (alert === 1) ? (<Alert message="Produto cadastrado" error={false}/>) : 
-                (alert === 2) ? (<Alert message="Erro no cadastro" error={true}/>) : (<></>)
+                (alert === 1) ? (<Alert message="Produto cadastrado" class="alert alert-success container" />) :
+                    (alert === 2) ? (<Alert message="Erro no cadastro" class="alert alert-danger container" />) :
+                        (alert === 3) ? (<Alert message="Servidor indisponível. Tente mais tarde." class="alert alert-danger container" />) : (<></>)
             }
 
             <main className="container form-content shadow">
-
 
                 <form>
                     <div className="form-group">

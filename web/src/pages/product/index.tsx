@@ -35,6 +35,7 @@ class Product extends React.Component<Props, State> {
         this.state = {
             AlertCarShop: 0,
             BtnAddCar: true,
+
             ProductInfo: {
                 ProductsId: 0,
                 ProductsName: "",
@@ -67,7 +68,7 @@ class Product extends React.Component<Props, State> {
         this.shopCar.selectIDB(this.state.ProductInfo.ProductsId).then((data: any) => {
             this.setBtnAddCar(data);
             this.setState({ AlertCarShop: 1 });
-            
+
             setTimeout(() => this.setState({ AlertCarShop: 0 }), 3000);
         });
     }
@@ -86,24 +87,29 @@ class Product extends React.Component<Props, State> {
         this.loadProducts();
     }
 
+    componentDidUpdate() {
+        if (this.state.ProductInfo.ProductsId !== Number(this.props.match?.params.id))
+            this.loadProducts();
+    }
+
     render() {
+
         return (
             <>
                 <Navbar />
                 {
-                    (this.state.AlertCarShop === 1) ? (<Alert message="Produto adicionado no carrinho" error={false} />) :
-                        (this.state.AlertCarShop === 2) ? (<Alert message="Produto removido do carrinho" error={false} />) : (<></>)
+                    (this.state.AlertCarShop === 1) ? (<Alert message="Produto adicionado no carrinho" class="alert alert-success container" />) :
+                        (this.state.AlertCarShop === 2) ? (<Alert message="Produto removido do carrinho" class="alert alert-success container" />) : (<></>)
                 }
 
                 <main className="container">
 
                     <div className="">
 
-                        <div className="description">
+                        <div className="title">
                             <h3>{this.state.ProductInfo.ProductsName} - {this.state.ProductInfo.ProductsManufactory}</h3>
-                            <p>{this.state.ProductInfo.ProductsDescription}</p>
                             <div className="img">
-                                <img src={this.state.ProductInfo.ProductsImg} alt="Imagem do produto" width="432px" height="270px" />
+                                <img src={this.state.ProductInfo.ProductsImg} alt="Imagem do produto" />
                             </div>
                         </div>
 
@@ -116,6 +122,10 @@ class Product extends React.Component<Props, State> {
                                     (<button type="button" className="btn btn-danger btn-block" onClick={this.deleteShopCarIndexedDB}>Remover do Carrinho</button>)
                             }
 
+                        </div>
+
+                        <div className="description">
+                            <p>{this.state.ProductInfo.ProductsDescription}</p>
                         </div>
 
                     </div>

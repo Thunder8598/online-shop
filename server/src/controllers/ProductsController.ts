@@ -9,11 +9,16 @@ class ProductsController {
     //Faz a conversão dos preços de números para texto
     private static DecimalConverter = (price?: number | string, convertToRs = true) => {
 
-        const stringPrice = String(price);
+        if (price === undefined) return;
 
-        let formatPrice = (convertToRs) ? stringPrice.replace(".", ",") : stringPrice.replace(",", ".");
+        if (typeof (price) === "string") 
+            return Number(price.replace(",", "."));
 
-        return formatPrice;
+        else{
+            const stringPrice = String(price.toFixed(2));
+
+            return stringPrice.replace(".", ",");
+        }
     }
 
     //Exibe todos os produtos da DB
@@ -74,7 +79,8 @@ class ProductsController {
             ProductsImg: (request.file !== undefined) ? request.file.filename : "",
         }
 
-        if (product.ProductsImg === "") return response.json(false);
+        if (product.ProductsImg === "")
+            return response.json(false);
 
         try {
             await DB("products").insert(product);

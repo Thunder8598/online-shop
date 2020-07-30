@@ -1,6 +1,29 @@
+@media only screen and (min-width:995px){
+   main{
+       --padding:10%;
+   }
+}
+
+@media only screen and (min-width:1200px){
+    main{
+        --padding:18%;
+    }
+}
+
 main {
-    position: relative;
-    top: 3rem;
+    position: absolute;
+
+    padding-left: var(--padding);
+
+    width: 100%;
+    height: auto;
+}
+
+.content{
+    position: absolute;
+    left:var(--position-left);
+
+    width:var(--width);
 }
 
 .price-lbl {
@@ -11,11 +34,7 @@ main {
 .cardFormat {
     width: 18rem;
     height: 22rem;
+
     margin-right: 10px;
     margin-bottom: 10px;
-}
-
-.alignContent{
-    position: relative;
-    left:10%;
 }
